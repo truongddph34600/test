@@ -171,10 +171,8 @@ if($insert_result && isset($conn)) {
             'TinhTrang' => 'Chờ thanh toán',
             'TongTien' => $amount
         );
-
         $sql = "INSERT INTO hoadonmomo (MaKH, MaMomo, NgayDat, TinhTrang, TongTien)
                 VALUES (?, ?, ?, ?, ?)";
-
         if ($stmt = mysqli_prepare($conn, $sql)) {
             mysqli_stmt_bind_param($stmt, "iissd",
                 $order_data['MaKH'],
