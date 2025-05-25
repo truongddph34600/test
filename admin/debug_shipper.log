@@ -1,0 +1,24 @@
+
+
+=== START donhang.php at 2025-05-25 12:28:15 ===
+File donhang.php accessed
+Executing SQL: SELECT h.*, k.TenKH
+        FROM hoadonmomo h
+        INNER JOIN khachhang k ON h.MaKH = k.MaKH
+        WHERE h.TrangThai='Đã duyệt'
+        AND h.TinhTrang='Đã thanh toán'
+        ORDER BY h.NgayGiao ASC
+Query successful, found 6 rows
+=== END donhang.php ===
+
+
+=== START donhang.php at 2025-05-25 12:28:18 ===
+File donhang.php accessed
+Executing SQL: SELECT h.*, k.TenKH
+        FROM hoadonmomo h
+        INNER JOIN khachhang k ON h.MaKH = k.MaKH
+        WHERE h.TrangThai='Đã duyệt'
+        AND h.TinhTrang='Đã thanh toán'
+        ORDER BY h.NgayGiao ASC
+Query successful, found 6 rows
+=== END donhang.php ===
