@@ -292,7 +292,7 @@ $dem_momo = mysqli_num_rows($rs_momo);
 <li class="nav-item">
     <a class="nav-link" href="?action=momo">
         <i class="mdi mdi-wallet menu-icon"></i>
-        <span>Giao Hàng Momo <sup style="border-radius: 10px;" class="badge-danger">
+        <span>Đơn Momo <sup style="border-radius: 10px;" class="badge-danger">
                 &#160;<?php echo $dem_momo ?>
                 &#160;</sup></span></a>
 </li>
