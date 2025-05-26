@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,11 +9,9 @@
     <title>Admin</title>
 
     <link rel="shortcut icon" href="assets/images/favicon.png" />
-    <script src="/onishoes/webroot/jquery/jquery.js"></script>
+    <script src="/beehat/webroot/jquery/jquery.js"></script>
     <link rel="stylesheet" href="template/css/sb-admin-2.min.css">
-    <link href="/onishoes/webroot/font/Font Awesome/css/all.min.css" rel="stylesheet" type="text/css">
-
-
+    <link href="/beehat/webroot/font/Font Awesome/css/all.min.css" rel="stylesheet" type="text/css">
 </head>
 
 <body class="" style="margin: 100px 0;">
