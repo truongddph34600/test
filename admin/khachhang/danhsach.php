@@ -310,9 +310,9 @@
                                 <a href="index.php?action=khachhang&view=sua&makh=<?php echo $row['MaKH']; ?>" class="btn btn-action btn-edit">
                                     <i class="far fa-edit mr-1"></i> Sửa
                                 </a>
-                                <a href="khachhang/xuly.php?xoa&makh=<?php echo $row['MaKH']; ?>" class="btn btn-action btn-delete btn-delete-confirm">
+                               <!-- <a href="khachhang/xuly.php?xoa&makh=<?php echo $row['MaKH']; ?>" class="btn btn-action btn-delete btn-delete-confirm">
                                     <i class="fas fa-trash-alt mr-1"></i> Xóa
-                                </a>
+                                </a>-->
                             </td>
                         </tr>
                         <?php } ?>

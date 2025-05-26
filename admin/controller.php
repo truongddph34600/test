@@ -50,7 +50,6 @@
                                             }else{
                                                  include('shippermomo/main.php');
                                             }
-                        
                         break;  
                     case 'danhthu':
                         if($check['Quyen']>2){
@@ -60,11 +59,11 @@
                         }
                         
                         break;
-                    case 'kho':
+                    case 'binhluan':
                         if($check['Quyen']>3){
                             echo('<center> BẠN KHÔNG CÓ QUYỀN TRUY CẬP!</center>');
                         }else{
-                            include('kho/main.php');
+                            include('binhluan/main.php');
                         }
                         
                         break;

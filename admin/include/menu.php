@@ -317,19 +317,11 @@ $dem_shipmomo = mysqli_num_rows($rs_shipmomo);
 </li>
 
 <hr class="sidebar-divider d-none d-md-block">
-            <!-- Kho Hàng -->
+            <!-- Bình Luận -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="mdi mdi-eye menu-icon"></i>
-                    <span>Kho Hàng</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="?action=kho&view=xemdh"> Xem đơn hàng</a>
-
-                    </div>
-                </div>
+                <a class="nav-link" href="?action=binhluan">
+                    <i class="mdi mdi-sale menu-icon"></i>
+                    <span>Bình Luận</span></a>
             </li>
 <hr class="sidebar-divider d-none d-md-block">
             <!-- Danh Mục -->
