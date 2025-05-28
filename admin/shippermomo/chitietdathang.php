@@ -80,8 +80,8 @@
                 <?php } ?>
             </tbody>
         </table>
-        <br><hr>
-        <h5 class="m-auto">Tổng : <?php echo number_format($total).' đ'; ?></h5>
-        <br><hr>
+
+
+
     </div>
 </div>

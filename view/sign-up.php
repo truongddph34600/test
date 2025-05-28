@@ -7,7 +7,34 @@
         </div>
     </div>
 </div>
+<?php
+// Thêm đoạn này ở đầu file, sau phần khai báo HTML đầu tiên
+if (isset($_POST['signup'])) {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $sdt = $_POST['sdt'];
+    $address = $_POST['address'];
+    $password = $_POST['password'];
 
+    $result = newUser($name, $email, $sdt, $address, $password);
+
+    echo "<div class='container'><div class='row'><div class='col-md-12'>";
+    if ($result === true) {
+        echo "<div class='alert alert-success' role='alert'>Đăng ký thành công!</div>";
+        // Có thể thêm redirect sau 2 giây
+        echo "<script>
+            setTimeout(function() {
+                window.location.href = '?view=login';
+            }, 2000);
+        </script>";
+    } else if ($result === "Tài khoản đã tồn tại") {
+        echo "<div class='alert alert-warning' role='alert'>Tài khoản đã tồn tại!</div>";
+    } else {
+        echo "<div class='alert alert-danger' role='alert'>Đăng ký thất bại!</div>";
+    }
+    echo "</div></div></div>";
+}
+?>
 <div id="colorlib-contact">
     <div class="container">
         <div class="row">

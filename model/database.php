@@ -547,16 +547,29 @@ function order_product($nn, $dcnn, $sdtnn, $makh, $tt) {
 // -------------------------------------------------------------------------------
 // ------------------------------------------ user MODEL----------------------
 // đăng ký mới
-function newUser($name,$email,$sdt,$address,$password){
-  global $conn;
-  $sql="INSERT INTO `khachhang`( `TenKH`, `Email`, `SDT`, `DiaChi`, `MatKhau`) VALUES ('$name','$email','$sdt','$address','$password')";
-  $resulf=mysqli_query($conn,$sql);
-  if($resulf){
-      return true;
-    }else{
-      return false;
-    }     
-  mysqli_close($conn);
+function newUser($name, $email, $sdt, $address, $password) {
+    global $conn;
+
+    // Kiểm tra email đã tồn tại chưa
+    $check_email = "SELECT * FROM `khachhang` WHERE `Email` = '$email'";
+    $result = mysqli_query($conn, $check_email);
+
+    if (mysqli_num_rows($result) > 0) {
+        return "Tài khoản đã tồn tại"; // Trả về thông báo nếu email đã tồn tại
+    }
+
+    // Nếu email chưa tồn tại, tiến hành thêm mới
+    $sql = "INSERT INTO `khachhang`(`TenKH`, `Email`, `SDT`, `DiaChi`, `MatKhau`)
+            VALUES ('$name','$email','$sdt','$address','$password')";
+    $resulf = mysqli_query($conn, $sql);
+
+    if ($resulf) {
+        return true; // Thêm thành công
+    } else {
+        return false; // Thêm thất bại
+    }
+
+    mysqli_close($conn);
 }
 // -------------------------
 // select khách hàng

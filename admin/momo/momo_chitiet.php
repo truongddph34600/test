@@ -276,17 +276,7 @@
             </div>
         </div>
 
-        <div class="row mt-4">
-            <div class="col-md-6"></div>
-            <div class="col-md-6">
-                <div class="invoice-total">
-                    <div class="row">
-                        <div class="col-6 invoice-total-label">Tổng thanh toán:</div>
-                        <div class="col-6 invoice-total-value"><?php echo number_format($so).' đ'; ?></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
 
         <div class="row mt-4">
             <div class="col-12 text-center">

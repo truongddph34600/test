@@ -580,6 +580,7 @@
                 <input type="hidden" name="dongia" form="form1" value='<?php echo number_format($price_sale) ?>'>
                 <div class="col-sm-12 text-center">
                     <p class="addtocart"><button type="submit" form="form1" name='addtocart' class="btn col-sm-12 btn-primary">Thêm vào giỏ hàng</button></p>
+                    <p> (hãy chọn size màu trước khi thêm vào giỏ hàng)</p>
                 </div>
             </form>
         </div>
@@ -719,6 +720,8 @@
 </div>
 
 <script>
+
+
     // Script để tăng giảm số lượng
     document.addEventListener('DOMContentLoaded', function() {
         const quantityInput = document.getElementById('soluong');

@@ -516,14 +516,14 @@
                             <span class="price"><?php $number = str_replace(',', '', $item_cart['DonGia']); echo number_format($number*$item_cart['SoLuong']); ?></span>
                         </div>
                     </div>
-                    <form action="?view=addtocart" method="post" id="delete_cart_product">
-                        <input type="hidden" name="productID" value="<?php echo $item_cart['MaSP']  ; ?>">
-                        <input type="hidden" name="size" value="<?php echo $item_cart['Size']  ; ?>">
-                        <input type="hidden" name="mau" value="<?php echo $item_cart['Mau']  ; ?>">
+                    <form action="?view=addtocart" method="post" id="delete_cart_product_<?php echo $dem; ?>">
+                        <input type="hidden" name="productID" value="<?php echo $item_cart['MaSP']; ?>">
+                        <input type="hidden" name="size" value="<?php echo $item_cart['Size']; ?>">
+                        <input type="hidden" name="mau" value="<?php echo $item_cart['Mau']; ?>">
                     </form>
                     <div class="one-eight text-center">
                         <div class="display-tc">
-                            <button type="submit" name=delete_cart_product form="delete_cart_product" class="closed" value="xoa"></button>
+                            <button type="submit" name="delete_cart_product" form="delete_cart_product_<?php echo $dem; ?>" class="closed" value="xoa"></button>
                         </div>
                     </div>
                 </div>

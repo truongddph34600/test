@@ -509,8 +509,8 @@ if (isset($_SESSION['laclac_khachang'])==false) {
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="fname"><i class="fas fa-user"></i> Họ và Tên</label>
-                                    <input type="text" id="fname" name="fname" class="form-control" placeholder="Nhập họ và tên của bạn" required value="<?php echo $kh['TenKH']?>">
+                                    <label  for="fname"><i class="fas fa-user"></i> Họ và Tên</label>
+                                    <input  type="text" id="fname" name="fname" class="form-control" placeholder="Nhập họ và tên của bạn" required value="<?php echo $kh['TenKH']?>">
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -579,7 +579,7 @@ if (isset($_SESSION['laclac_khachang'])==false) {
                                     <div class="payment-method">
                                         <form method="POST" target="_blank" enctype="application/x-www-form-urlencoded" action="view/xulythanhtoanmomo.php">
                                             <input type="hidden" value="<?php echo $_POST['tongtien'] ?>" name="tongtien">
-                                            <button type="submit" name="momo" class="btn btn-momo">
+                                            <button type="submit" name="momo" class="btn btn-momo" >
                                                 <i class="fas fa-qrcode payment-icon"></i> Thanh Toán MoMo QR Code
                                             </button>
                                         </form>
