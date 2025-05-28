@@ -23,7 +23,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-8 offset-sm-2 text-center ">
-                <h2>SẢN PHẨM NỔI BẬT</h2>
+                <h2>SẢN PHẨM </h2>
             </div>
         </div>
         <?php
@@ -134,7 +134,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-8 offset-sm-2 text-center ">
-                <h2>SẢN PHẨM BÁN CHẠY</h2>
+                <h2>SẢN PHẨM</h2>
             </div>
         </div>
         <?php

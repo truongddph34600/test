@@ -1,10 +1,25 @@
 <div class="container-fluid">
-    <div class=" alert alert-primary">
+    <div class="alert alert-primary">
         <h4 class="page-title">
             <span class="page-title-icon bg-gradient-primary text-white mr-2">
             </span> ADMIN &#160;<i class="fas fa-chevron-right" style="font-size: 18px"></i>&#160; Khuyến mãi
         </h4>
     </div>
+    <div class="card card-body">
+        <!-- Thêm phần hiển thị thông báo lỗi -->
+        <?php if(isset($_GET['thongbao'])): ?>
+            <div class="alert <?php echo $_GET['thongbao'] == 'them' ? 'alert-success' : 'alert-danger'; ?> mb-3">
+                <?php
+                    if($_GET['thongbao'] == 'trung') {
+                        echo 'Tên khuyến mãi đã tồn tại!';
+                    } elseif($_GET['thongbao'] == 'them') {
+                        echo 'Thêm khuyến mãi thành công!';
+                    } elseif($_GET['thongbao'] == 'loi') {
+                        echo 'Có lỗi xảy ra!';
+                    }
+                ?>
+            </div>
+        <?php endif; ?>
     <div class="card card-body ">
         <form class="form-row " method="GET" action="khuyenmai/xuly.php" enctype="multipart/form-data">
             <div class="form-group col-sm-4">

@@ -11,7 +11,6 @@
                         }else{
                             include('danhmuc/danhmuc.php');
                         }
-                        
                         break;
                      case 'sanpham':
                          if($check['Quyen']>2){
@@ -19,7 +18,6 @@
                         }else{
                             include('sanpham/sanpham.php');
                         }
-              
                         break; 
                     case 'mau':
                          if($check['Quyen']>2){
@@ -27,7 +25,6 @@
                         }else{
                              include('mau/mau.php');
                         }
-                       
                         break;
                     case 'xldathang':
                          if($check['Quyen']==3 || $check['Quyen']==5 ){
@@ -35,7 +32,6 @@
                         }else{
                              include('dondathang/main.php');
                         }
-                        
                         break;      
                     case 'giaohang':
                         if($check['Quyen']>2 && $check['Quyen']<5){
@@ -45,9 +41,9 @@
                         }
                     break;
                     case 'giaohangmomo':
-                                            if($check['Quyen']>2 && $check['Quyen']<5){
-                                                echo('<center> BẠN KHÔNG CÓ QUYỀN TRUY CẬP!</center>');
-                                            }else{
+                    if($check['Quyen']>2 && $check['Quyen']<5){
+                    echo('<center> BẠN KHÔNG CÓ QUYỀN TRUY CẬP!</center>');
+                      }else{
                                                  include('shippermomo/main.php');
                                             }
                         break;  

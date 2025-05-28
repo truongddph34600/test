@@ -136,6 +136,19 @@
     ?>
 
     <div class="container py-4">
+        <?php if(isset($_GET['thongbao'])): ?>
+            <div class="alert <?php echo $_GET['thongbao'] == 'sua' ? 'alert-success' : 'alert-danger'; ?> m-3">
+                <?php
+                    if($_GET['thongbao'] == 'trung') {
+                        echo 'Tên khuyến mãi đã tồn tại!';
+                    } elseif($_GET['thongbao'] == 'sua') {
+                        echo 'Cập nhật khuyến mãi thành công!';
+                    } elseif($_GET['thongbao'] == 'loi') {
+                        echo 'Có lỗi xảy ra!';
+                    }
+                ?>
+            </div>
+        <?php endif; ?>
         <!-- Header -->
         <div class="page-header bg-white p-4 d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">

@@ -33,28 +33,34 @@ function validateDiscountValues($percentDiscount, $amountDiscount) {
 // Add new promotion
 if(isset($_GET['them'])){
     $tkm = sanitizeInput($_GET['tkm']);
+
+    // Kiểm tra tên khuyến mãi đã tồn tại chưa
+    $check_sql = "SELECT COUNT(*) as count FROM khuyenmai WHERE TenKM = '$tkm'";
+    $check_result = mysqli_query($conn, $check_sql);
+    $row = mysqli_fetch_assoc($check_result);
+
+    if($row['count'] > 0) {
+        header('location:../index.php?action=khuyenmai&thongbao=trung');
+        exit();
+    }
+
     $nbd = sanitizeInput($_GET['nbd']);
     $nkt = sanitizeInput($_GET['nkt']);
-    $tg = !empty($_GET['t']) ? abs(floatval($_GET['t'])) : 0; // Ensure positive value
-    $pt = !empty($_GET['pt']) ? abs(floatval($_GET['pt'])) : 0; // Ensure positive value
+    $tg = !empty($_GET['t']) ? abs(floatval($_GET['t'])) : 0;
+    $pt = !empty($_GET['pt']) ? abs(floatval($_GET['pt'])) : 0;
 
-    // Limit percent discount to 100%
-    if ($pt > 100) $pt = 100;
-
-    $mt = sanitizeInput($_GET['mt']);
-
-    // Validate dates
+    // Các validation khác giữ nguyên...
     if (!validateDates($nbd, $nkt)) {
         header('location:../index.php?action=khuyenmai&thongbao=loi-ngay');
         exit;
     }
 
-    // Validate discount values
     if (!validateDiscountValues($pt, $tg)) {
         header('location:../index.php?action=khuyenmai&thongbao=loi-km');
         exit;
     }
 
+    $mt = sanitizeInput($_GET['mt']);
     $sql = "INSERT INTO `khuyenmai`(`TenKM`, `MoTa`, `KM_PT`, `TienKM`, `NgayBD`, `NgayKT`)
             VALUES ('$tkm', '$mt', $pt, $tg, '$nbd', '$nkt')";
 
@@ -67,6 +73,46 @@ if(isset($_GET['them'])){
     exit;
 }
 
+// Update promotion
+if(isset($_GET['sua'])){
+    $makm = intval($_GET['makm']);
+    $tkm = sanitizeInput($_GET['tkm']);
+
+    // Kiểm tra tên khuyến mãi đã tồn tại chưa (trừ khuyến mãi hiện tại)
+    $check_sql = "SELECT COUNT(*) as count FROM khuyenmai WHERE TenKM = '$tkm' AND MaKM != $makm";
+    $check_result = mysqli_query($conn, $check_sql);
+    $row = mysqli_fetch_assoc($check_result);
+
+    if($row['count'] > 0) {
+        header('location:../index.php?action=khuyenmai&view=sua&makm='.$makm.'&thongbao=trung');
+        exit();
+    }
+
+    $nbd = sanitizeInput($_GET['nbd']);
+    $nkt = sanitizeInput($_GET['nkt']);
+    $tg = !empty($_GET['t']) ? abs(floatval($_GET['t'])) : 0;
+    $pt = !empty($_GET['pt']) ? abs(floatval($_GET['pt'])) : 0;
+
+    // Các validation khác giữ nguyên...
+
+    $mt = sanitizeInput($_GET['mt']);
+    $sql = "UPDATE `khuyenmai` SET
+            `TenKM`='$tkm',
+            `TienKM`=$tg,
+            `KM_PT`=$pt,
+            `MoTa`='$mt',
+            `NgayBD`='$nbd',
+            `NgayKT`='$nkt'
+            WHERE MaKM=$makm";
+
+    $rs = mysqli_query($conn, $sql);
+    if($rs){
+        header('location:../index.php?action=khuyenmai&thongbao=sua');
+    } else {
+        header('location:../index.php?action=khuyenmai&thongbao=loi');
+    }
+    exit;
+}
 // Delete promotion
 if(isset($_GET['xoa'])){
     $id = intval($_GET['makm']); // Ensure integer value
@@ -91,51 +137,6 @@ if(isset($_GET['xoa'])){
     }
     exit;
 }
-
-// Update promotion
-if(isset($_GET['sua'])){
-    $makm = intval($_GET['makm']); // Ensure integer value
-    $tkm = sanitizeInput($_GET['tkm']);
-    $nbd = sanitizeInput($_GET['nbd']);
-    $nkt = sanitizeInput($_GET['nkt']);
-    $tg = !empty($_GET['t']) ? abs(floatval($_GET['t'])) : 0; // Ensure positive value
-    $pt = !empty($_GET['pt']) ? abs(floatval($_GET['pt'])) : 0; // Ensure positive value
-
-    // Limit percent discount to 100%
-    if ($pt > 100) $pt = 100;
-
-    $mt = sanitizeInput($_GET['mt']);
-
-    // Validate dates
-    if (!validateDates($nbd, $nkt)) {
-        header('location:../index.php?action=khuyenmai&view=sua&makm='.$makm.'&thongbao=loi-ngay');
-        exit;
-    }
-
-    // Validate discount values
-    if (!validateDiscountValues($pt, $tg)) {
-        header('location:../index.php?action=khuyenmai&view=sua&makm='.$makm.'&thongbao=loi-km');
-        exit;
-    }
-
-    $sql = "UPDATE `khuyenmai` SET
-            `TenKM`='$tkm',
-            `TienKM`=$tg,
-            `KM_PT`=$pt,
-            `MoTa`='$mt',
-            `NgayBD`='$nbd',
-            `NgayKT`='$nkt'
-            WHERE MaKM=$makm";
-
-    $rs = mysqli_query($conn, $sql);
-    if($rs){
-        header('location:../index.php?action=khuyenmai&thongbao=sua');
-    } else {
-        header('location:../index.php?action=khuyenmai&thongbao=loi');
-    }
-    exit;
-}
-
 // Apply promotion to multiple products
 if(isset($_GET['apply'])){
     if(!isset($_GET['chon']) || empty($_GET['chon'])) {

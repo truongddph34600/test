@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <p class="bread"><span><a href="index.html">Trang Chủ</a></span> / <span>Đăng ký</span></p>
+                <p class="bread"><span><a href="http://beehat.test/?view">Trang Chủ</a></span> / <span>Đăng ký</span></p>
             </div>
         </div>
     </div>

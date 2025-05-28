@@ -156,52 +156,103 @@
 
         <!-- Content -->
         <div class="content-card card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="m-0">
-                    <i class="fas fa-edit mr-2"></i>
-                    Thông tin Voucher
-                </h5>
-                <span class="badge badge-primary px-3 py-2">Mã Voucher: <?php echo $kq['MaGG'] ?></span>
-            </div>
-            <div class="card-body">
-                <form method="GET" action="phieugiamgia/xuly.php" enctype="multipart/form-data">
-                    <input hidden class="form-control" name="MaGG" value="<?php echo $kq['MaGG'] ?>">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-label" for="tengg">
-                                    <i class="fas fa-file-signature mr-1"></i> Tên Voucher
-                                </label>
-                                <input type="text" class="form-control" id="tengg" name="tengg" value="<?php echo $kq['TenGG'] ?>" required>
-                            </div>
+                    <!-- Thêm div hiển thị thông báo lỗi -->
+                    <?php if(isset($_GET['thongbao'])): ?>
+                        <div class="alert <?php echo $_GET['thongbao'] == 'trung' || $_GET['thongbao'] == 'vuotgioihan' ? 'alert-danger' : 'alert-success'; ?> m-3">
+                            <?php
+                                if($_GET['thongbao'] == 'trung') {
+                                    echo 'Tên voucher đã tồn tại!';
+                                } else if($_GET['thongbao'] == 'vuotgioihan') {
+                                    echo 'Tiền giảm giá không được vượt quá 100.000đ!';
+                                }
+                            ?>
                         </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-label" for="tiengg">
-                                    <i class="fas fa-dollar-sign mr-1"></i> Tiền giảm giá
-                                </label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="tiengg" name="tiengg" value="<?php echo $kq['TienGG'] ?>">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">VNĐ</span>
+                    <?php endif; ?>
+
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="m-0">
+                            <i class="fas fa-edit mr-2"></i>
+                            Thông tin Voucher
+                        </h5>
+                        <span class="badge badge-primary px-3 py-2">Mã Voucher: <?php echo $kq['MaGG'] ?></span>
+                    </div>
+                    <div class="card-body">
+                        <form method="GET" action="phieugiamgia/xuly.php" enctype="multipart/form-data" id="editVoucherForm" onsubmit="return validateEditForm()">
+                            <input hidden class="form-control" name="MaGG" value="<?php echo $kq['MaGG'] ?>">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="tengg">
+                                            <i class="fas fa-file-signature mr-1"></i> Tên Voucher
+                                        </label>
+                                        <input type="text" class="form-control" id="tengg" name="tengg" value="<?php echo $kq['TenGG'] ?>" required>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    <div class="row mt-4">
-                        <div class="col-md-12 text-right">
-                            <button type="submit" class="btn btn-submit" name="sua">
-                                <i class="fas fa-save mr-1"></i> Cập nhật
-                            </button>
-                        </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="tiengg">
+                                            <i class="fas fa-dollar-sign mr-1"></i> Tiền giảm giá
+                                        </label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" id="tiengg" name="tiengg"
+                                                   value="<?php echo $kq['TienGG'] ?>" min="0" max="100000">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">VNĐ</span>
+                                            </div>
+                                        </div>
+                                        <small class="text-danger" id="error-message" style="display: none;"></small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-md-12 text-right">
+                                    <button type="submit" class="btn btn-submit" name="sua">
+                                        <i class="fas fa-save mr-1"></i> Cập nhật
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
-    </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+
+            <script>
+            function validateEditForm() {
+                const tiengg = document.getElementById('tiengg').value;
+                const errorMessage = document.getElementById('error-message');
+
+                // Kiểm tra giá trị tiền giảm giá
+                if (tiengg > 100000) {
+                    errorMessage.style.display = 'block';
+                    errorMessage.textContent = 'Tiền giảm giá không được vượt quá 100.000đ';
+                    return false;
+                }
+
+                if (tiengg < 0) {
+                    errorMessage.style.display = 'block';
+                    errorMessage.textContent = 'Tiền giảm giá không được âm';
+                    return false;
+                }
+
+                return true;
+            }
+
+            // Xử lý hiển thị thông báo lỗi khi load trang
+            document.addEventListener('DOMContentLoaded', function() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const thongbao = urlParams.get('thongbao');
+                const errorMessage = document.getElementById('error-message');
+
+                if (thongbao === 'vuotgioihan') {
+                    errorMessage.style.display = 'block';
+                    errorMessage.textContent = 'Tiền giảm giá không được vượt quá 100.000đ';
+                }
+            });
+            </script>
 </body>
 </html>

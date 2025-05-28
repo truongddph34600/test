@@ -350,7 +350,7 @@ if (isset($_GET['partnerCode'])) {
             <p class="icon-addcart"><span><i class="fas fa-check"></i></span></p>
             <?php if (isset($_GET['resultCode']) && $_GET['resultCode'] == '0'): ?>
                 <h2 class="mb-4">Cảm ơn bạn đã mua hàng!</h2>
-                <p class="mb-4">Thanh toán MoMo thành công. Đơn hàng của bạn đã được xác nhận và sẽ được xử lý trong thời gian sớm nhất.</p>
+                <p class="mb-4">Thanh toán MoMo thành công. Đơn hàng của bạn sẽ được nhân viên gọi lại xác nhận.</p>
                 <?php if (isset($_GET['transId'])): ?>
                     <p>Mã giao dịch MoMo: <strong><?php echo $_GET['transId']; ?></strong></p>
                 <?php endif; ?>
@@ -360,7 +360,7 @@ if (isset($_GET['partnerCode'])) {
                 <p>Vui lòng thử lại hoặc chọn phương thức thanh toán khác.</p>
             <?php else: ?>
                 <h2 class="mb-4">Cảm ơn bạn đã mua hàng!</h2>
-                <p class="mb-4">Đơn hàng của bạn đã được xác nhận và sẽ được xử lý trong thời gian sớm nhất.</p>
+                <p class="mb-4">Đơn hàng của bạn sẽ được nhân viên gọi lại xác nhận.</p>
             <?php endif; ?>
             <p>
                 <a href="?view" class="btn btn-primary">Tiếp tục mua sắm</a>

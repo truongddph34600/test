@@ -219,7 +219,47 @@ include_once('../model/database.php');
     </style>
 </head>
 <body>
-
+<!-- Thông báo -->
+<?php if(isset($_GET['thongbao'])): ?>
+    <div class="alert alert-dismissible fade show <?php
+        switch($_GET['thongbao']) {
+            case 'xoa':
+                echo 'alert-success';
+                break;
+            case 'sua':
+                echo 'alert-success';
+                break;
+            case 'khongthexoa':
+            case 'khongthesua':
+                echo 'alert-warning';
+                break;
+            case 'loi':
+                echo 'alert-danger';
+                break;
+        }
+    ?>" role="alert">
+        <?php
+        switch($_GET['thongbao']) {
+            case 'xoa':
+                echo '<i class="fas fa-check-circle me-2"></i>Xóa sản phẩm thành công!';
+                break;
+            case 'sua':
+                echo '<i class="fas fa-check-circle me-2"></i>Cập nhật sản phẩm thành công!';
+                break;
+            case 'khongthexoa':
+                echo '<i class="fas fa-exclamation-circle me-2"></i>Không thể xóa sản phẩm này vì đang có đơn hàng của khách hàng!';
+                break;
+            case 'khongthesua':
+                echo '<i class="fas fa-exclamation-circle me-2"></i>Không thể sửa sản phẩm này vì đang có đơn hàng của khách hàng!';
+                break;
+            case 'loi':
+                echo '<i class="fas fa-times-circle me-2"></i>Đã xảy ra lỗi trong quá trình xử lý!';
+                break;
+        }
+        ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
 <div class="container-fluid py-4">
     <!-- Dashboard Header -->
     <div class="dashboard-header">
@@ -499,6 +539,35 @@ include_once('../model/database.php');
             }
         }
     });
+
+    // Auto hide toast after 3 seconds
+    window.addEventListener('DOMContentLoaded', (event) => {
+        const toasts = document.querySelectorAll('.toast');
+        toasts.forEach(toast => {
+            setTimeout(() => {
+                const bsToast = new bootstrap.Toast(toast);
+                bsToast.hide();
+            }, 3000);
+        });
+    });
+
+    // Confirm delete với SweetAlert2 (thêm thư viện này vào phần head)
+    function confirmDelete(url) {
+        Swal.fire({
+            title: 'Xác nhận xóa?',
+            text: "Bạn có chắc chắn muốn xóa sản phẩm này?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#e74a3b',
+            cancelButtonColor: '#858796',
+            confirmButtonText: 'Xóa',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = url;
+            }
+        })
+    }
 </script>
 </body>
 </html>

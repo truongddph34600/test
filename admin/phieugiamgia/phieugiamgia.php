@@ -12,6 +12,19 @@
                     <h5 class="mb-0">Quản Lý Voucher</h5>
                 </div>
                 <div class="card-body">
+                    <?php
+                    if(isset($_GET['thongbao'])) {
+                        if($_GET['thongbao'] == 'trung') {
+                            echo '<div class="alert alert-danger">Tên voucher đã tồn tại!</div>';
+                        } else if($_GET['thongbao'] == 'vuotgioihan') {
+                            echo '<div class="alert alert-danger">Tiền giảm giá không được vượt quá 100.000đ!</div>';
+                        } else if($_GET['thongbao'] == 'them') {
+                            echo '<div class="alert alert-success">Thêm voucher thành công!</div>';
+                        } else if($_GET['thongbao'] == 'sua') {
+                            echo '<div class="alert alert-success">Cập nhật voucher thành công!</div>';
+                        }
+                    }
+                    ?>
                     <a href="?action=phieugiamgia&view=them" class="btn btn-add">
                                     <i class="fas fa-user-plus mr-2"></i>Thêm Voucher
                                 </a>

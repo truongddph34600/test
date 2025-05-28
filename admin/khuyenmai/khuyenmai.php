@@ -12,6 +12,29 @@
                     <h5 class="mb-0">Quản Lý Khuyến Mãi</h5>
                 </div>
                 <div class="card-body">
+                     <?php if(isset($_GET['thongbao'])): ?>
+                            <div class="alert <?php echo in_array($_GET['thongbao'], ['them', 'sua', 'xoa']) ? 'alert-success' : 'alert-danger'; ?> mb-3">
+                                <?php
+                                    switch($_GET['thongbao']) {
+                                        case 'them':
+                                            echo 'Thêm khuyến mãi thành công!';
+                                            break;
+                                        case 'sua':
+                                            echo 'Cập nhật khuyến mãi thành công!';
+                                            break;
+                                        case 'xoa':
+                                            echo 'Xóa khuyến mãi thành công!';
+                                            break;
+                                        case 'trung':
+                                            echo 'Tên khuyến mãi đã tồn tại!';
+                                            break;
+                                        case 'loi':
+                                            echo 'Có lỗi xảy ra!';
+                                            break;
+                                    }
+                                ?>
+                            </div>
+                        <?php endif; ?>
                     <a href="?action=khuyenmai&view=them" class="btn btn-add">
                                     <i class="fas fa-user-plus mr-2"></i>Thêm Khuyến Mãi
                                 </a>

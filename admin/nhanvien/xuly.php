@@ -4,7 +4,7 @@ include_once('../../model/database.php');
 
 
 	//----------------------------------------
-	//Cập nhập
+	//theem
 	if(isset($_POST['them'])){
 		$ten=$_POST['tennv'];
 		$email=$_POST['email'];

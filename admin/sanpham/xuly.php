@@ -68,69 +68,103 @@ if (isset($_POST['xlsua'])) {
     $mancc = $_POST['mancc'];
     $dongia = $_POST['dongia'];
 
-    // Kiểm tra xem có ảnh nền mới được chọn hay không
-    if (isset($_FILES['anhnen']) && $_FILES['anhnen']['size'] > 0) {
-        $anhnen = $_FILES['anhnen']['name'];
-        $AnhSP_tmp = $_FILES['anhnen']['tmp_name'];
-        move_uploaded_file($AnhSP_tmp, '../../webroot/image/sanpham/' . $anhnen);
-        $sql_them = "UPDATE `sanpham` SET `TenSP`='$tensp', `MaDM`='$madm', `MaNCC`='$mancc', `DonGia`='$dongia', `AnhNen`='$anhnen' WHERE `MaSP`='$masp'";
-    } else {
-        $sql_them = "UPDATE `sanpham` SET `TenSP`='$tensp', `MaDM`='$madm', `MaNCC`='$mancc', `DonGia`='$dongia' WHERE `MaSP`='$masp'";
-    }
+    try {
+        // Kiểm tra xem sản phẩm có trong đơn hàng không
+        $check_orders = "SELECT COUNT(*) as count FROM chitiethoadonmomo WHERE MaSP = $masp";
+        $result = mysqli_query($conn, $check_orders);
+        $order_count = mysqli_fetch_assoc($result)['count'];
 
-    $rs_them = mysqli_query($conn, $sql_them);
-
-    if (isset($rs_them)) {
-        // Kiểm tra xem có ảnh sản phẩm mới được chọn hay không
-        if (isset($_FILES['anhsp']) && !empty($_FILES['anhsp']['name'][0])) {
-            // Xóa ảnhsp cũ
-            $sql_delete_anhsp = "DELETE FROM `anhsp` WHERE `MaSP` = '$masp'";
-            mysqli_query($conn, $sql_delete_anhsp);
-
-            // Thêm hoặc cập nhật ảnhsp mới
-            $dem = 1;
-            foreach ($_FILES['anhsp']['name'] as $key => $value) {
-                $anhsp = $_FILES['anhsp']['name'][$key];
-                $anh_tmp = $_FILES['anhsp']['tmp_name'][$key];
-                move_uploaded_file($anh_tmp, '../../webroot/image/sanpham/' . $anhsp);
-
-                // Sử dụng ON DUPLICATE KEY UPDATE để xử lý trường hợp trùng khóa chính
-                $sql_upanhsp = "INSERT INTO `anhsp` (`MaSP`, `Anh$dem`) VALUES ('$masp', '$anhsp') 
-                                ON DUPLICATE KEY UPDATE `Anh$dem`='$anhsp'";
-                mysqli_query($conn, $sql_upanhsp);
-
-                $dem++;
-            }
+        if ($order_count > 0) {
+            // Nếu có đơn hàng, chuyển hướng với thông báo
+            header('location:../index.php?action=sanpham&thongbao=khongthesua');
+            exit();
         }
 
-        header('location:../index.php?action=sanpham&view=themsp&thongbao=sua');
-    } else {
-        header('location:../index.php?action=sanpham&view=themsp&thongbao=loi');
+        // Nếu không có đơn hàng, tiến hành cập nhật
+        if (isset($_FILES['anhnen']) && $_FILES['anhnen']['size'] > 0) {
+            $anhnen = $_FILES['anhnen']['name'];
+            $AnhSP_tmp = $_FILES['anhnen']['tmp_name'];
+            move_uploaded_file($AnhSP_tmp, '../../webroot/image/sanpham/' . $anhnen);
+            $sql_them = "UPDATE `sanpham` SET `TenSP`='$tensp', `MaDM`='$madm', `MaNCC`='$mancc', `DonGia`='$dongia', `AnhNen`='$anhnen' WHERE `MaSP`='$masp'";
+        } else {
+            $sql_them = "UPDATE `sanpham` SET `TenSP`='$tensp', `MaDM`='$madm', `MaNCC`='$mancc', `DonGia`='$dongia' WHERE `MaSP`='$masp'";
+        }
+
+        $rs_them = mysqli_query($conn, $sql_them);
+
+        if ($rs_them) {
+            // Kiểm tra xem có ảnh sản phẩm mới được chọn hay không
+            if (isset($_FILES['anhsp']) && !empty($_FILES['anhsp']['name'][0])) {
+                // Xóa ảnhsp cũ
+                $sql_delete_anhsp = "DELETE FROM `anhsp` WHERE `MaSP` = '$masp'";
+                mysqli_query($conn, $sql_delete_anhsp);
+
+                // Thêm hoặc cập nhật ảnhsp mới
+                $dem = 1;
+                foreach ($_FILES['anhsp']['name'] as $key => $value) {
+                    $anhsp = $_FILES['anhsp']['name'][$key];
+                    $anh_tmp = $_FILES['anhsp']['tmp_name'][$key];
+                    move_uploaded_file($anh_tmp, '../../webroot/image/sanpham/' . $anhsp);
+
+                    // Sử dụng ON DUPLICATE KEY UPDATE để xử lý trường hợp trùng khóa chính
+                    $sql_upanhsp = "INSERT INTO `anhsp` (`MaSP`, `Anh$dem`) VALUES ('$masp', '$anhsp')
+                                   ON DUPLICATE KEY UPDATE `Anh$dem`='$anhsp'";
+                    mysqli_query($conn, $sql_upanhsp);
+
+                    $dem++;
+                }
+            }
+
+            header('location:../index.php?action=sanpham&thongbao=sua');
+        } else {
+            header('location:../index.php?action=sanpham&thongbao=loi');
+        }
+    } catch (mysqli_sql_exception $e) {
+        // Bắt lỗi và chuyển hướng với thông báo
+        header('location:../index.php?action=sanpham&thongbao=khongthesua');
     }
 }
 
 
 
-// Xóa Sản Phẩm
+// Xóa Sản Phẩm
 if (isset($_GET['xoa'])) {
     $masp = $_GET['masp'];
-    $delete = "DELETE FROM `chitietsanpham` WHERE MaSP = $masp";
-    $rs_d = mysqli_query($conn, $delete);
 
-    if ($rs_d) {
-        $delete2 = "DELETE FROM `sanpham` WHERE MaSP = $masp";
-        $rs_d2 = mysqli_query($conn, $delete2);
+    try {
+        // Kiểm tra xem sản phẩm có trong đơn hàng không
+        $check_orders = "SELECT COUNT(*) as count FROM chitiethoadonmomo WHERE MaSP = $masp";
+        $result = mysqli_query($conn, $check_orders);
+        $order_count = mysqli_fetch_assoc($result)['count'];
 
-        if ($rs_d2) {
-            $delete3 = "DELETE FROM `anhsp` WHERE MaSP = $masp";
-            $rs_d3 = mysqli_query($conn, $delete3);
+        if ($order_count > 0) {
+            // Nếu có đơn hàng, chuyển hướng với thông báo
+            header('location:../index.php?action=sanpham&thongbao=khongthexoa');
+            exit();
+        }
 
-            if ($rs_d3) {
-                header('location:../index.php?action=sanpham&thongbao=xoa');
-            } else {
-                header('location:../index.php?action=sanpham&view=themsp&thongbao=loi');
+        // Nếu không có đơn hàng, tiến hành xóa
+        $delete = "DELETE FROM `chitietsanpham` WHERE MaSP = $masp";
+        $rs_d = mysqli_query($conn, $delete);
+
+        if ($rs_d) {
+            $delete2 = "DELETE FROM `sanpham` WHERE MaSP = $masp";
+            $rs_d2 = mysqli_query($conn, $delete2);
+
+            if ($rs_d2) {
+                $delete3 = "DELETE FROM `anhsp` WHERE MaSP = $masp";
+                $rs_d3 = mysqli_query($conn, $delete3);
+
+                if ($rs_d3) {
+                    header('location:../index.php?action=sanpham&thongbao=xoa');
+                } else {
+                    header('location:../index.php?action=sanpham&thongbao=loi');
+                }
             }
         }
+    } catch (mysqli_sql_exception $e) {
+        // Bắt lỗi và chuyển hướng với thông báo
+        header('location:../index.php?action=sanpham&thongbao=khongthexoa');
     }
 }
 ?>
