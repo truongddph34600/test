@@ -472,6 +472,8 @@
         width: 50px;
         height: 50px;
     }
+
+
 </style>
 
 
@@ -632,15 +634,6 @@
                                                         <span class="text-left"><?php echo $rowkh['TenKH'] ?></span>
                                                         <span class="text-right"><?php echo $row['ThoiGian'] ?></span>
                                                     </h4>
-                                                    <p class="star">
-                                                        <span>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        </span>
-                                                    </p>
                                                     <p><?php echo $row['NoiDung'] ?></p>
                                                 </div>
                                             </div>

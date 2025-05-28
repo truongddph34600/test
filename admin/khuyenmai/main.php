@@ -3,8 +3,8 @@
 		$view=$_GET['view'];
 		switch ($view) {
 		case 'them':
-                        					include_once('khuyenmai/them.php');
-                        				break;
+            include_once('khuyenmai/them.php');
+                break;
 			case 'sua':
 
 					include_once('khuyenmai/sua.php');

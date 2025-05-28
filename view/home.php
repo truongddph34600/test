@@ -140,8 +140,6 @@
         <?php
         $product = sellingProductsL4();
         ?>
-
-
         <div class="container ">
             <div class="row wrapper-dt">
                 <div class="col-12">

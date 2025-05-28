@@ -492,7 +492,6 @@ if (isset($_GET['alert']) && $_GET['alert'] !== '') {
                                                 } else {
                                                     $product_name = "Sản phẩm không tồn tại";
                                                 }
-
                                                 $unit = isset($item['DonGia']) ? $item['DonGia'] : 0;
                                             ?>
                                             <tr>

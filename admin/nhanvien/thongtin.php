@@ -1,4 +1,4 @@
-<?php 
+<!--<?php
 	$kh=$_SESSION['admin'];
 	  $sql1="select *from nhanvien where MaNV=".$kh['MaNV'];
 	  $rs1=mysqli_query($conn,$sql1);

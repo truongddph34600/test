@@ -527,7 +527,8 @@
                         </div>
                     </div>
                 </div>
-                <?php  $subtotal= $subtotal+$number*$item_cart['SoLuong']; $dem = $dem+$item_cart['SoLuong']; }}else{ echo '<div class="text-center py-5"><i class="fas fa-shopping-cart fa-3x mb-3 text-muted"></i><p>Chưa có sản phẩm trong giỏ hàng của bạn</p><a href="?view" class="btn btn-primary mt-2">Tiếp tục mua sắm</a></div>';} ;?>
+                <?php  $subtotal= $subtotal+$number*$item_cart['SoLuong']; $dem = $dem+$item_cart['SoLuong']; }
+                }else{ echo '<div class="text-center py-5"><i class="fas fa-shopping-cart fa-3x mb-3 text-muted"></i><p>Chưa có sản phẩm trong giỏ hàng của bạn</p><a href="?view" class="btn btn-primary mt-2">Tiếp tục mua sắm</a></div>';} ;?>
             </div>
         </div>
         <div class="row row-pb-lg">
@@ -539,7 +540,7 @@
                                 <div class="row form-group">
                                     <div class="col-sm-9">
                                         <input type="text" id="Coupon" class="form-control input-number" placeholder="Mã giảm giá ...">
-                                        <p><span id="coupon2"></span></p>
+
                                     </div>
                                     <div class="col-sm-3">
                                         <input type="button" id="Apply_Coupon" value="Áp dụng" class="btn btn-primary">
@@ -550,11 +551,11 @@
                         <div class="col-sm-4 text-center">
                             <div class="total">
                                 <div class="sub">
-                                    <p><span>Tạm tính:</span> <span id="subtotal"><?php if(isset($_SESSION['cart_product'])){ echo number_format($subtotal);}else echo '0'; ?> </span></p>
-                                    <p><span>Giảm giá:</span> <span id="coupon_apply"> 0</span></p>
+                                    <p><span>Tạm tính:</span> <span id="subtotal"><?php if(isset($_SESSION['cart_product'])){ echo number_format($subtotal);}else echo '0'; ?> ₫ </span></p>
+                                    <p><span>Giảm giá:</span> <span id="coupon_apply"> 0</span>₫</p>
                                 </div>
                                 <div class="grand-total">
-                                    <p><span><strong>Tổng cộng:</strong></span> <span id="total"><?php if(isset($_SESSION['cart_product'])){ echo number_format($subtotal);}else echo '0'; ?> </span></p>
+                                    <p><span><strong>Tổng cộng:</strong></span> <span id="total"><?php if(isset($_SESSION['cart_product'])){ echo number_format($subtotal);}else echo '0'; ?> ₫ </span></p>
                                 </div>
 
                             </div>

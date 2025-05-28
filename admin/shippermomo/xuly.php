@@ -10,10 +10,8 @@ if(isset($_GET['action'])){
             $mahd = $_GET['mahd'];
             $admin = $_SESSION['admin'];
             $manv = $admin['MaNV'];
-
             // Bắt đầu transaction
             mysqli_begin_transaction($conn);
-
             try {
                 // Cập nhật trạng thái đơn hàng
                 $sql = "UPDATE hoadonmomo

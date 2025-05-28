@@ -411,7 +411,6 @@ function order_product_momo($nn, $dcnn, $sdtnn, $makh, $tt) {
         // Trả về mã hóa đơn để sử dụng trong quá trình thanh toán MoMo
         return $mahd;
     }
-
     return false;
 }
 

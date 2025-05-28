@@ -1,5 +1,4 @@
-<?php 
-
+<?php
 if(isset($_GET['view'])){
     $view=$_GET['view'];
         switch ($view) {
