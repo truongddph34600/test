@@ -350,7 +350,6 @@ $dem_shipmomo = mysqli_num_rows($rs_shipmomo);
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="?action=sanpham">Danh Sách</a>
-                        <a class="collapse-item" href="?action=sanpham&view=themsp">Thêm</a>
                         <a class="collapse-item" href="?action=mau&view=them">Thêm màu</a>
                     </div>
                 </div>

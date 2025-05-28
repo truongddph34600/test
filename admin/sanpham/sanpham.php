@@ -278,7 +278,28 @@ include_once('../model/database.php');
             <?php include_once('sanpham/main.php');?>
 
             <!-- Action Bar -->
+<!-- Search Bar -->
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="form-control search-input" id="searchInput"
+                   placeholder="Tìm kiếm theo mã, tên sản phẩm..."
+                   onkeyup="searchProducts()">
+        </div>
+    </div>
+    <div class="col-md-6 text-end">
+        <a href="?action=sanpham&view=themsp" class="btn add-product-btn">
+            <i class="fas fa-plus me-2"></i>Thêm sản phẩm mới
+        </a>
+    </div>
+</div>
 
+<!-- No Results Message -->
+<div id="noResults" class="alert alert-info text-center" style="display: none;">
+    <i class="fas fa-info-circle me-2"></i>
+    Không tìm thấy sản phẩm nào phù hợp!
+</div>
 
             <!-- Product Stats -->
             <div class="row mb-4">
