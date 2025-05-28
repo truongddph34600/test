@@ -13,7 +13,7 @@
                         }
                         break;
                      case 'sanpham':
-                         if($check['Quyen']>2){
+                         if($check['Quyen']==3 || $check['Quyen']==5 ){
                             echo('<center> BẠN KHÔNG CÓ QUYỀN TRUY CẬP!</center>');
                         }else{
                             include('sanpham/sanpham.php');
@@ -93,7 +93,6 @@
                         }else{
                             include('phieugiamgia/main.php');
                                                 }
-
                                                 break;
                     case 'thongtincanhan':  
                          include('nhanvien/thongtin.php');

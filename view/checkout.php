@@ -509,26 +509,26 @@ if (isset($_SESSION['laclac_khachang'])==false) {
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label  for="fname"><i class="fas fa-user"></i> Họ và Tên</label>
-                                    <input  type="text" id="fname" name="fname" class="form-control" placeholder="Nhập họ và tên của bạn" required value="<?php echo $kh['TenKH']?>">
+                                    <label   for="fname"><i class="fas fa-user" ></i> Họ và Tên</label>
+                                    <input  type="text" id="fname" name="fname" class="form-control" placeholder="Nhập họ và tên của bạn" required value="<?php echo $kh['TenKH']?>" disabled>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="address"><i class="fas fa-map-marker-alt"></i> Địa Chỉ</label>
-                                    <input type="text" id="address" name="address" class="form-control" placeholder="Nhập địa chỉ giao hàng" required value="<?php echo $kh['DiaChi']?>">
+                                    <label  for="address"><i class="fas fa-map-marker-alt" ></i> Địa Chỉ</label>
+                                    <input type="text" id="address" name="address" class="form-control" placeholder="Nhập địa chỉ giao hàng" required value="<?php echo $kh['DiaChi']?>" disabled>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="email"><i class="fas fa-envelope"></i> E-mail</label>
-                                    <input type="email" id="email" name="email" class="form-control" placeholder="Nhập email của bạn" required value="<?php echo $kh['Email']?>">
+                                    <label  for="email"><i class="fas fa-envelope" ></i> E-mail</label>
+                                    <input type="email" id="email" name="email" class="form-control" placeholder="Nhập email của bạn" required value="<?php echo $kh['Email']?>" disabled>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="phone"><i class="fas fa-phone"></i> Số điện thoại</label>
-                                    <input type="text" id="phone" name="phone" class="form-control" placeholder="Nhập số điện thoại" required value="<?php echo $kh['SDT']?>">
+                                    <label  for="phone"><i class="fas fa-phone" ></i> Số điện thoại</label>
+                                    <input type="text" id="phone" name="phone" class="form-control" placeholder="Nhập số điện thoại" required value="<?php echo $kh['SDT']?>" disabled>
                                 </div>
                             </div>
                             <input type="hidden" name="tongtien" value="<?php echo $_POST['tongtien'] ;?>">
